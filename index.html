@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+ <head>
+ <title>Learning Javascript</title>
+ 
+ <meta charset="utf-8" />
+ <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet" type="text/css" href="style.css"/>
+ 
+ </head>
+ 
+ <body id="background">
+
+ 
+ <div class="form">
+ 
+	<h1 margin-bottom:200px; class="left class="align" class="header">Ingreso de Numero Telefonico<h1>
+
+ 
+	<input class="left id=input type=text placeholder="nnnn-nnnn"></input>
+	<br>
+	<button class="left">Entrar</button>
+	
+	
+	 <script>
+		document.getElementById("right").style.visibility="none";
+		document.getElementById("wrong").style.visibility="none";
+ 
+		document.getElementById("button").onclick=function(){
+ 
+		var userSubmit="";
+		var submitLength=0;
+		var submitLimit=9;
+		
+		var letters = /^[A-Za-z]+$/;  
+ 
+		userSubmit=document.getElementById("input").value;
+		console.log(userSubmit.length)
+		
+		for(i=0;i<userSubmit.length;i++){
+		if(userSubmit[i].match(letters)){
+		alert("La entrada no puede contener letras!");
+		document.getElementById("input").value="";
+		break;
+		}
+		}
+		
+		if(userSubmit.length<9 || userSubmit.length>9){
+			alert("La entrada debe ser de 8 digitos y un guion! (1234-5678)");
+			document.getElementById("right").style.visibility="none";
+			document.getElementById("wrong").style.visibility="visible";
+			document.getElementById("input").value="";
+		
+			}else if(userSubmit[4]!="-"){
+				alert("Debe haber un guión despúes del cuarto dígito! (1234-5678)");
+				document.getElementById("right").style.visibility="none";
+				document.getElementById("wrong").style.visibility="visible";
+				document.getElementById("input").value="";
+			}else{
+				document.getElementById("right").style.visibility="visible";
+				document.getElementById("wrong").style.visibility="none";
+				document.getElementById("input").value="";
+			}
+		}
+ 
+ </script>
+	
+	</div>
+	
+ </body>
+</html>
