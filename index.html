@@ -19,14 +19,12 @@
 	<h1 margin-bottom:200px; class="left class="align" class="header">Ingreso de Numero Telefonico<h1>
 
  
-	<input class="left id=input type=text placeholder="nnnn-nnnn"></input>
+	<input id=input type=text placeholder="nnnn-nnnn"></input>
 	<br>
-	<button class="left">Entrar</button>
+	<button id="button">Entrar</button>
 	
 	
 	 <script>
-		document.getElementById("right").style.visibility="none";
-		document.getElementById("wrong").style.visibility="none";
  
 		document.getElementById("button").onclick=function(){
  
@@ -49,24 +47,43 @@
 		
 		if(userSubmit.length<9 || userSubmit.length>9){
 			alert("La entrada debe ser de 8 digitos y un guion! (1234-5678)");
-			document.getElementById("right").style.visibility="none";
-			document.getElementById("wrong").style.visibility="visible";
 			document.getElementById("input").value="";
 		
 			}else if(userSubmit[4]!="-"){
 				alert("Debe haber un guión despúes del cuarto dígito! (1234-5678)");
-				document.getElementById("right").style.visibility="none";
-				document.getElementById("wrong").style.visibility="visible";
 				document.getElementById("input").value="";
 			}else{
-				document.getElementById("right").style.visibility="visible";
-				document.getElementById("wrong").style.visibility="none";
 				document.getElementById("input").value="";
 			}
 		}
  
  </script>
 	
+	</div>
+	
+	<div align=center class="facts">
+	<h2>Datos interesantes sobre los numeros de telefono:
+	<ul>
+	<li>Poseer una secuencia numérica fácil de memorizar puede hacer la diferencia para un montón de empresas. Sin embargo, algunas líneas 
+	requieren de subastas para definir quien sera el ganador / poseedor. 
+	Los dos números telefónicos más costosos de los que se tenga registro son el 666-6666, 
+	vendido en Qatar por nada menos que US$ 207 millones, y el número 888-8888, 
+	cuyo titular chino lo compró por $280 millones de dólares.
+	
+	</li>
+	<br>
+	<li>
+	Steve Wozniak, cofundador de Apple, fue dueño de uno de los números de teléfono más caro del mundo (888-8888),
+	pero cansado de recibir llamadas en brima, decidió venderlo por $600,000 dólares.
+	
+	
+	</li>
+	<br>
+	<li>
+	Hay una recomendación en Estados Unidos para evitar que los estudios de cine usen en las películas números de teléfono que existan en la vida real. 
+	Como solución a ésto, algunos estudios tienen números de teléfono específicos para ser utilizados en las películas.
+	</li>
+	</ul>
 	</div>
 	
  </body>
