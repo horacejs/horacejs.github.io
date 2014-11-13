@@ -1,0 +1,26 @@
+.form{
+ background-color:#80FF00
+ }
+ 
+ .align{
+ margin-top:200px;
+ margin-left:500px;
+ }
+ 
+ .left{
+  margin-left:500px;
+ }
+ 
+ .center{
+ align:center;
+ }
+
+ 
+ #background{
+ background:#ACFA58;
+ }
+ 
+ .header{
+ color:black;
+ align:center;
+ }
