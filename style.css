@@ -1,14 +1,11 @@
 .form{
- background-color:#80FF00
+ margin-top:200px;
+ margin-left:420px;
  }
  
- .align{
+ .allign{
  margin-top:200px;
  margin-left:500px;
- }
- 
- .left{
-  margin-left:500px;
  }
  
  .center{
@@ -17,10 +14,15 @@
 
  
  #background{
- background:#ACFA58;
+ background:#F7FE2E;
  }
  
  .header{
  color:black;
  align:center;
+ }
+ 
+ .facts{
+ color:white;
+ background:#2E2E2E;
  }
