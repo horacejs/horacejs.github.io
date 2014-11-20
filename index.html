@@ -1,88 +1,227 @@
-<!doctype html>
 <html>
  <head>
- <title>Learning Javascript</title>
+ <title>Javascript Game</title>
  
  <meta charset="utf-8" />
  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<link rel="stylesheet" type="text/css" href="style.css"/>
+ 
+  <link rel="stylesheet" type="text/css" href="style.css"/>
  
  </head>
  
- <body id="background">
+<body align=center id="background">
+ 
+ <div>
+ <img id="image" src="images/template.jpg" height=200px width=200px/>
+ </div>
+ 
+  <div class="top" id="introInstructions">
+  Adivina la palabra!
+  Ingresa una letra en el espacio dado
+  ó
+  Ingresa toda la palabra si te sientes con suerte!
+  Tamaño de la palabra: (7 letras)
+  </div>
+  <div id="word" class="wrd">
+  - - - - - - -
+  </div>
+  
+  <hr/>
 
- 
-	<div class="form">
- 
-			<h1 margin-bottom:200px; class="left class="align" class="header">Ingreso de Numero Telefonico<h1>
+  <div id= "instructions" align=center>
+  Ingresa una letra:
+  <input id=input type=text placeholder="Tu letra va aquí"></input>
+  <button id=button>Adivinar!</button>
+  <br/></br>
+  Ingresa toda la palabra!:
+   <input id=inputword type=text placeholder="O adivina la palabra aquí"></input>
+  <button id=button2>Me siento con suerte!</button>
+  </div>
+  
+  <hr>
+  <div id="more">
+  <h2>Primero Ingresa tu propia palabra</h2>
 
+  <input id=ownWord type=text placeholder="Ingresa tu propia palabra aquí"></input>
+  <button id=buttonIniciar>Iniciar!</button>
+  <button id=buttonIniciarEntera>Guardar Palabra Entera</button>
  
-			<input id=input type=text placeholder="nnnn-nnnn"></input>
-			<br>
-			<button id="button">Entrar</button>
+  </div>
+  
+  <script>
+  document.getElementById("button").disabled=true;
+	document.getElementById("button2").disabled=true;
+  </script>
+  
+  <script>
+	function game(word){
+	var initialWord = "_ _ _ _ _ _ _";
+  var finalWord = word;
+  var letters = /^[A-Za-z]+$/;
+  var userSubmit="";
+  var userWord=["-","-","-","-","-","-","-"];
+  var success=0;
+  var fail=true;
+  var lives=5;
+  var hits=0;
+  
+  var blankSpots=[];
+  
+	document.getElementById("introInstructions").innerHTML="Adivina la nueva palabra! Ingresa una letra en el espacio dado ó Ingresa toda la palabra si te sientes con suerte! Tamaño de la palabra: ("+word.length+" letras)";
+	for(k=0;k<word.length;k++){
+		blankSpots.splice(k,1,"_");
+	}
 	
+	document.getElementById("word").innerHTML=blankSpots;
+	userWord=blankSpots;
+  
+   document.getElementById("button").onclick=function(){
+  
+    userSubmit=document.getElementById("input").value;
+	userSubmit=userSubmit.toLowerCase();
+ 
+	console.log(userSubmit.length);
+	if(userSubmit.length!=1){
+		alert("Error!, Solo puedes ingresar una letra!");
+	}
+
+	for(j=0;j<finalWord.length;j++){
+		if(userSubmit[0]==finalWord[j]){
+			fail=false;
+			break;
+	}else{
+		fail=true;
+	}
+	}
 	
-		<script>
- 
-			document.getElementById("button").onclick=function(){
- 
-			var userSubmit="";
-			var submitLength=0;
-			var submitLimit=9;
+	console.log(fail);
+	if(fail==true){
+		if(lives>=1){
+		lives-=1;
+		alert("Letra incorrecta! , te quedan "+lives+" vidas");
 		
-			var letters = /^[A-Za-z]+$/;  
- 
-			userSubmit=document.getElementById("input").value;
-			console.log(userSubmit.length)
+		switch (lives){
+		case 4:
+		changeImage("./images/head.jpg");
+		console.log(document.getElementById("image").src);
+		break;
+		case 3:
+		changeImage("./images/leftarm.jpg");
+		console.log(document.getElementById("image").src);
+		break;
+		case 2:
+		changeImage("./images/botharms.jpg");
+		console.log(document.getElementById("image").src);
+		break;
+		case 1:
+		changeImage("./images/leftleg.jpg");
+		console.log(document.getElementById("image").src);
+		break;
+		}
 		
-			for(i=0;i<userSubmit.length;i++){
-				if(userSubmit[i].match(letters)){
-					alert("La entrada no puede contener letras!");
-					document.getElementById("input").value="";
-				break;
+		document.getElementById("input").value="";
+		}
+		
+		if(lives==0){
+			changeImage("./images/complete.jpg");
+			alert("Has perdido! :(")
+			document.getElementById("button").disabled=true;
+			document.getElementById("button2").disabled=true;
+		}
+		
+		fail=false;
+	}
+
+	if(userSubmit.length==1)
+	if(userSubmit[0].match(letters)){
+		for(i=0;i<finalWord.length;i++)
+			if(userSubmit[0]==finalWord[i]){
+				userWord.splice(i,1,userSubmit[0]);
+				success++;
+				hits++;
+				if(success==1){
+					alert("Correcto!");
+					success=0;
 				}
-			}
-		
-			if(userSubmit.length<9 || userSubmit.length>9){
-				alert("La entrada debe ser de 8 digitos y un guion! (1234-5678)");
+				console.log(userWord);
+				document.getElementById("word").innerHTML=userWord;
 				document.getElementById("input").value="";
-		
-			}else if(userSubmit[4]!="-"){
-					alert("Debe haber un guión despúes del cuarto dígito! (1234-5678)");
-					document.getElementById("input").value="";
-			}else{
-					document.getElementById("input").value="";
-				}
+
 			}
+			
+			
+			if (hits==finalWord.length){
+			 alert("Has Ganado!!!");
+			 changeImage("./images/success.jpg");
+			 document.getElementById("button").disabled=true;
+			 document.getElementById("button2").disabled=true;
+			}
+	
+	}
+  
+  
+  }
+  
+  function changeImage(x){
+   document.getElementById("image").src=x;
+   }
+  
+	}
+  </script>
+  
+  <script>
+  var newUserWord
+	document.getElementById("buttonIniciar").onclick=function(){
+	
+	game(document.getElementById("ownWord").value);
+	document.getElementById("button").disabled=false;
+	document.getElementById("button2").disabled=false;
+	
+	}
+  </script>
+  
+  <script>
+	
+  </script>
  
-		</script>
+ <script>
+document.getElementById("buttonIniciarEntera").onclick=function(){
+	wholeWordGame(document.getElementById("ownWord").value);
+}
+ </script>
+ 
+ <script>
+ function wholeWordGame(word){
+  document.getElementById("button2").onclick=function(){
 	
-	</div>
+	var finalWord=word;
+	var userWordAttempt=document.getElementById("inputword").value;
 	
-	<div align=center class="facts">
-		<h2>Datos interesantes sobre los numeros de telefono:
-		<ul>
-			<li>Poseer una secuencia numérica fácil de memorizar puede hacer la diferencia para un montón de empresas. Sin embargo, algunas líneas 
-				requieren de subastas para definir quien sera el ganador / poseedor. 
-				Los dos números telefónicos más costosos de los que se tenga registro son el 666-6666, 
-				vendido en Qatar por nada menos que US$ 207 millones, y el número 888-8888, 
-				cuyo titular chino lo compró por $280 millones de dólares.
+	userWordAttempt=userWordAttempt.toLowerCase();
 	
-			</li>
-		<br>
-			<li>
-				Steve Wozniak, cofundador de Apple, fue dueño de uno de los números de teléfono más caro del mundo (888-8888),
-				pero cansado de recibir llamadas en brima, decidió venderlo por $600,000 dólares.
-			</li>
-		<br>
-			<li>
-				Hay una recomendación en Estados Unidos para evitar que los estudios de cine usen en las películas números de teléfono que existan en la vida real. 
-				Como solución a ésto, algunos estudios tienen números de teléfono específicos para ser utilizados en las películas.
-			</li>
-		</ul>
-	</div>
+	if(userWordAttempt==finalWord){
+		alert("Correcto!, has ganado!");
+		changeImage("./images/success.jpg");
+		document.getElementById("inputword").value="";
+		document.getElementById("button").disabled=true;
+		document.getElementById("button2").disabled=true;
+		
+	}else{
+		alert("Incorrecto!, has perdido! :(");
+		changeImage("./images/complete.jpg");
+		document.getElementById("inputword").value="";
+		document.getElementById("button").disabled=true;
+		document.getElementById("button2").disabled=true;
+	}
 	
+	function changeImage(x){
+   document.getElementById("image").src=x;
+   }
+	
+ }
+ }
+ </script>
+ 
  </body>
 </html>

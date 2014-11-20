@@ -1,28 +1,13 @@
-.form{
- margin-top:200px;
- margin-left:420px;
+#background{
+ background:#D8D8D8;
  }
  
- .allign{
- margin-top:200px;
- margin-left:500px;
+ .wrd{
+ font-size:140px;
+ color:#00BFFF;
  }
  
- .center{
- align:center;
- }
-
- 
- #background{
- background:#F7FE2E;
- }
- 
- .header{
- color:black;
- align:center;
- }
- 
- .facts{
- color:white;
- background:#2E2E2E;
+ .top{
+ margin-top:40px;
+ font-size:30px;
  }
